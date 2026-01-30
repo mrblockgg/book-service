@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @UtilityClass
-public class ParseQuery {
+public class HttpQueryUtil {
 
     public Map<String, String> parseQueryParameters(String query) {
         Map<String, String> params = new HashMap<>();
