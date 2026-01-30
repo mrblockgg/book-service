@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 public class Book {
 
     long id;
-    String title;
-    String author;
-    String isbn;
+    String title;            // Длинна от 2 до 100
+    String author;           // Длинна от 2 до 50
+    String isbn;             // Формат (регулярное выражение): \d{3}-\d-\d{5}-\d{3}-\d
 
     @JsonProperty(value = "publication_year")
-    Integer publicationYear;
-    String genre;
+    Integer publicationYear; // В диапазоне от 2000 до 2026
+    String genre;            // Должен быть enum
 
     public enum Genre {
 
