@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.mrblock'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+
+    compileOnly 'org.projectlombok:lombok'
+
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    implementation 'ch.qos.logback:logback-classic:1.5.25'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+    implementation 'io.jooby:jooby-hikari:4.0.13'
+    implementation("org.postgresql:postgresql:42.7.8")
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
