@@ -2,9 +2,11 @@ package dev.mrblock.infrastructure.http.handler;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import dev.mrblock.data.mapper.BookMapper;
 import dev.mrblock.domain.Book;
 import dev.mrblock.domain.BookService;
 import dev.mrblock.utility.BookUtil;
+import dev.mrblock.utility.CheckUtil;
 import dev.mrblock.utility.ExchangeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -29,6 +31,8 @@ public class UpdateBookHandler implements HttpHandler {
 
         long bookId = Long.parseLong(parts[3]);
         Book book = BookUtil.readBookFromExchangeBody(exchange);
+
+        CheckUtil.check(book, exchange);
 
         bookService.update(bookId, book);
 
