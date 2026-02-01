@@ -58,11 +58,7 @@ public class PostgresBookRepository implements BookRepository {
 
     public void update(long id, String title, String author, Integer publicationYear, String genre) throws SQLException {
         prepareStatement(UPDATE_BOOK_SQL, statement -> {
-            statement.setString(1, title);
-            statement.setString(2, author);
-            statement.setObject(3, publicationYear);
-            statement.setString(4, genre);
-            statement.setLong(5, id);
+            BookMapper.updateBook(id, title, author, publicationYear, genre, statement);
 
             int updatedRows = statement.executeUpdate();
             if (updatedRows != 1) throw new RuntimeException("Book with id %s not found when execute update".formatted(id));
