@@ -1,8 +1,8 @@
 package dev.mrblock.infrastructure.http.handler;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import dev.mrblock.domain.BookService;
+import dev.mrblock.infrastructure.http.BookHttpHandler;
 import dev.mrblock.utility.ExchangeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class RemoveBookHandler implements HttpHandler {
+public class RemoveBookHandler implements BookHttpHandler {
 
     private final BookService bookService;
 

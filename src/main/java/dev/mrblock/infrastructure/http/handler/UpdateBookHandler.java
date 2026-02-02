@@ -1,12 +1,11 @@
 package dev.mrblock.infrastructure.http.handler;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import dev.mrblock.data.mapper.BookMapper;
 import dev.mrblock.domain.Book;
 import dev.mrblock.domain.BookService;
+import dev.mrblock.infrastructure.http.BookHttpHandler;
 import dev.mrblock.utility.BookUtil;
-import dev.mrblock.utility.CheckUtil;
+import dev.mrblock.utility.BookValidator;
 import dev.mrblock.utility.ExchangeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -14,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class UpdateBookHandler implements HttpHandler {
+public class UpdateBookHandler implements BookHttpHandler {
 
     private final BookService bookService;
 
@@ -32,7 +31,7 @@ public class UpdateBookHandler implements HttpHandler {
         long bookId = Long.parseLong(parts[3]);
         Book book = BookUtil.readBookFromExchangeBody(exchange);
 
-        CheckUtil.validateBookAndSendErrorIfInvalid(book, exchange);
+        BookValidator.validate(book);
 
         bookService.update(bookId, book);
 

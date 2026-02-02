@@ -1,9 +1,9 @@
 package dev.mrblock.infrastructure.http.handler;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import dev.mrblock.domain.Book;
 import dev.mrblock.domain.BookService;
+import dev.mrblock.infrastructure.http.BookHttpHandler;
 import dev.mrblock.utility.BookUtil;
 import dev.mrblock.utility.HttpQueryUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class GetBooksByPageHandler implements HttpHandler {
+public class GetBooksByPageHandler implements BookHttpHandler {
 
     private final BookService bookService;
 
