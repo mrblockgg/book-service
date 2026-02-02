@@ -43,26 +43,30 @@ public class CheckUtil {
     }
 
     @SneakyThrows
-    public static void check(Book book, HttpExchange exchange) {
-        try {
-            String title = book.getTitle();
-            String author = book.getAuthor();
-            String isbn = book.getIsbn();
-            String genre = book.getGenre();
-            Integer publicationYear = book.getPublicationYear();
+    public static void check(Book book) {
+        String title = book.getTitle();
+        String author = book.getAuthor();
+        String isbn = book.getIsbn();
+        String genre = book.getGenre();
+        Integer publicationYear = book.getPublicationYear();
 
-            checkTitle(title);
-            checkAuthor(author);
+        checkTitle(title);
+        checkAuthor(author);
 
-            if (!isValidRegex(isbn)) {
-                throw new RuntimeException("don't valid ISBN");
-            }
-
-            checkPublicationYear(publicationYear);
-            checkGenre(genre);
-        } catch (RuntimeException e) {
-            ExchangeUtil.sendCodeResponse(exchange, 405);
+        if (!isValidRegex(isbn)) {
+            throw new RuntimeException("don't valid ISBN");
         }
+
+        checkPublicationYear(publicationYear);
+        checkGenre(genre);
     }
 
+    @SneakyThrows
+    public static void validateBookAndSendErrorIfInvalid(Book book, HttpExchange httpExchange) {
+        try {
+            check(book);
+        } catch (RuntimeException e) {
+            ExchangeUtil.sendCodeResponse(httpExchange, 405);
+        }
+    }
 }

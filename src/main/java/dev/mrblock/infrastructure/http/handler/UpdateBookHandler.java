@@ -32,7 +32,7 @@ public class UpdateBookHandler implements HttpHandler {
         long bookId = Long.parseLong(parts[3]);
         Book book = BookUtil.readBookFromExchangeBody(exchange);
 
-        CheckUtil.check(book, exchange);
+        CheckUtil.validateBookAndSendErrorIfInvalid(book, exchange);
 
         bookService.update(bookId, book);
 

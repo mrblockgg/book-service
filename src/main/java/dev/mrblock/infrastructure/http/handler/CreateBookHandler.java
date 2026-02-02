@@ -22,7 +22,8 @@ public class CreateBookHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) {
         Book book = BookUtil.readBookFromExchangeBody(exchange);
-        CheckUtil.check(book, exchange);
+
+        CheckUtil.validateBookAndSendErrorIfInvalid(book, exchange);
 
         bookService.newBook(book);
         ExchangeUtil.sendCodeResponse(exchange, 200);
